@@ -30,12 +30,13 @@
 // }));
 
 var telerivet = require('telerivet');
+const { decrypt } = require('./crypto');
 
 var tr = new telerivet.API('a7BE5_2RSauSKNX9rn45z8VqqnCUuWpmdEPA');
 var project = tr.initProjectById('PJb8a05e3c9bafd692');
 const SendSMS=(to, text)=>new Promise((resolve, reject)=>{
     project.sendMessage({
-        content: text, 
+        content: decrypt(text), 
         to_number: to,
     }, function(err, message) {
         if(err){
